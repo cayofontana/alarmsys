@@ -19,6 +19,7 @@ private:
 	uint8_t pinoTrigger;
 	unsigned long intervalo;
 	uint8_t deteccoes;
+	
 	void inicializar(void);
 	uint16_t obterMedicao(void);
 };

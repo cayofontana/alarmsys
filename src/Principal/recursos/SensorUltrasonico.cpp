@@ -5,18 +5,7 @@ SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger)
 	deteccoes = 0;
 	this->pinoEcho = pinoEcho;
 	this->pinoTrigger = pinoTrigger;
-}
-
-uint8_t
-SensorUltrasonico::getPinoEcho(void)
-{
-	return (pinoEcho);
-}
-
-uint8_t
-SensorUltrasonico::getPinoTrigger(void)
-{
-	return (pinoTrigger);
+	inicializar();
 }
 
 bool
@@ -30,6 +19,13 @@ SensorUltrasonico::existeObjeto(void)
 	if (deteccoes > MINIMO_DETECCAO)
 		return (true);
 	return (false);
+}
+
+void
+SensorUltrasonico::inicializar(void)
+{
+	pinMode(pinoEcho, INPUT);
+	pinMode(pinoTrigger, OUTPUT);
 }
 
 uint16_t

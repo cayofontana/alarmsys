@@ -6,7 +6,7 @@ const uint8_t pinoSirene = 4;
 void setup()
 {
         Serial.begin(115200);
-        inicializarPinos();
+        pinMode(pinoSirene, OUTPUT);
 }
 
 void loop()
@@ -18,11 +18,4 @@ void loop()
         }
         else
                 digitalWrite(pinoSirene, LOW);
-}
-
-void inicializarPinos()
-{
-        pinMode(sensorUltrasonico.getPinoEcho(), INPUT);
-        pinMode(sensorUltrasonico.getPinoTrigger(), OUTPUT);
-        pinMode(pinoSirene, OUTPUT);
 }

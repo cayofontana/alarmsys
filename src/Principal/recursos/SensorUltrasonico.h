@@ -11,8 +11,6 @@ class SensorUltrasonico
 {
 public:
 	SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger);
-	uint8_t getPinoEcho(void);
-	uint8_t getPinoTrigger(void);
 	bool existeObjeto(void);
 
 private:
@@ -21,6 +19,7 @@ private:
 	uint8_t pinoTrigger;
 	unsigned long intervalo;
 	uint8_t deteccoes;
+	void inicializar(void);
 	uint16_t obterMedicao(void);
 };
 

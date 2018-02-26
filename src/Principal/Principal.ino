@@ -1,5 +1,4 @@
 #include <vector>
-
 #include "SensorUltrasonico.h"
 
 using namespace std;

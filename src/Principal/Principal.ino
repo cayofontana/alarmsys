@@ -1,9 +1,7 @@
 #include <vector>
 #include "SensorUltrasonico.h"
 
-using namespace std;
-
-vector<SensorUltrasonico> sensoresUltrasonicos;
+std::vector<SensorUltrasonico> sensoresUltrasonicos;
 const uint8_t pinoSirene = 4;
 
 void setup()
@@ -11,29 +9,29 @@ void setup()
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
 
-        sensoresUltrasonicos.reserve(2);
-        sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 50, 5000));
-        sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 50, 5000));
+        sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 500, 15000));
+        sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 500, 15000));
 }
 
 void loop()
 {
-        bool detectou;
+        bool objetoDetectado;
         
-        for (vector<SensorUltrasonico>::iterator sensorUltrasonico = sensoresUltrasonicos.begin(); sensorUltrasonico != sensoresUltrasonicos.end(); ++sensorUltrasonico)
+        for (std::vector<SensorUltrasonico>::iterator sensorUltrasonico = sensoresUltrasonicos.begin(); sensorUltrasonico != sensoresUltrasonicos.end(); ++sensorUltrasonico)
+                sensorUltrasonico->detectar();
+
+        for (std::vector<SensorUltrasonico>::iterator sensorUltrasonico = sensoresUltrasonicos.begin(); sensorUltrasonico != sensoresUltrasonicos.end(); ++sensorUltrasonico)
         {
-                if (!sensorUltrasonico->detectar())
+                if (!sensorUltrasonico->existeObjeto())
                 {
-                        detectou = false;
+                        objetoDetectado = false;
                         break;
                 }
-                else
-                        detectou = true;
+                objetoDetectado = true;
         }
 
-        if (detectou)
+        if (objetoDetectado)
                 digitalWrite(pinoSirene, HIGH);
         else
                 digitalWrite(pinoSirene, LOW);
 }
-

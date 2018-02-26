@@ -40,20 +40,20 @@ SensorUltrasonico::detectar(void)
 void
 SensorUltrasonico::run()
 {
-      	digitalWrite(pinoTrigger, LOW);
-      	delayMicroseconds(2);
-      
-      	digitalWrite(pinoTrigger, HIGH);
-      	delayMicroseconds(10);
-      	digitalWrite(pinoTrigger, LOW);
-      
-      	distanciaEcoada = pulseIn(pinoEcho, HIGH);
-      	distanciaEcoada *= velocidadeSom / 2;
-      
-      	if (distanciaEcoada < MAXIMA_DISTANCIA)
-      		      deteccoes++;
-      	else
-      		      deteccoes = 0;
-      
-      	runned();
+        digitalWrite(pinoTrigger, LOW);
+        delayMicroseconds(2);
+        
+        digitalWrite(pinoTrigger, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(pinoTrigger, LOW);
+        
+        distanciaEcoada = pulseIn(pinoEcho, HIGH);
+        distanciaEcoada *= velocidadeSom / 2;
+        
+        if (distanciaEcoada < MAXIMA_DISTANCIA)
+                deteccoes++;
+        else
+                deteccoes = 0;
+        
+        runned();
 }

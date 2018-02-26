@@ -21,20 +21,20 @@ SensorUltrasonico::existeObjeto(void)
 void
 SensorUltrasonico::detectar(void)
 {
-      	if (shouldRun())
-      	{
-            		setInterval(frequencia);
-            		run();
-      
-            		if (deteccoes == MINIMO_DETECCAO)
-            		{
-                  			setInterval(intervalo);
+        if (shouldRun())
+        {
+                setInterval(frequencia);
+                run();
+                
+                if (deteccoes == MINIMO_DETECCAO)
+                {
+                        setInterval(intervalo);
                         deteccoes = 0;
-                  			objetoDetectado = true;
-            		}
-            		else
-            			      objetoDetectado = false;
-      	}
+                        objetoDetectado = true;
+                }
+                else
+                        objetoDetectado = false;
+        }
 }
 
 void

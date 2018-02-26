@@ -1,35 +1,39 @@
 #include "SensorUltrasonico.h"
 
-SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger)
+SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo)
 {
-	deteccoes = 0;
 	this->pinoEcho = pinoEcho;
 	this->pinoTrigger = pinoTrigger;
-	inicializar();
-}
-
-bool
-SensorUltrasonico::existeObjeto(void)
-{
-	if (obterMedicao() < MAXIMA_DISTANCIA)
-		deteccoes++;
-	else
-		deteccoes = 0;
-
-	if (deteccoes > MINIMO_DETECCAO)
-		return (true);
-	return (false);
-}
-
-void
-SensorUltrasonico::inicializar(void)
-{
+	this->frequencia = frequencia;
+	this->intervalo = intervalo;
+	distanciaEcoada = deteccoes = 0;
+	objetoDetectado = false;
 	pinMode(pinoEcho, INPUT);
 	pinMode(pinoTrigger, OUTPUT);
 }
 
-uint16_t
-SensorUltrasonico::obterMedicao(void)
+bool
+SensorUltrasonico::detectar(void)
+{
+	if (shouldRun())
+	{
+		setInterval(frequencia);
+		run();
+
+		if (deteccoes > MINIMO_DETECCAO)
+		{
+			setInterval(intervalo);
+			objetoDetectado = true;
+		}
+		else
+			objetoDetectado = false;
+	}
+
+	return (objetoDetectado);
+}
+
+void
+SensorUltrasonico::run()
 {
 	digitalWrite(pinoTrigger, LOW);
 	delayMicroseconds(2);
@@ -38,7 +42,13 @@ SensorUltrasonico::obterMedicao(void)
 	delayMicroseconds(10);
 	digitalWrite(pinoTrigger, LOW);
 
-	intervalo = pulseIn(pinoEcho, HIGH);
+	distanciaEcoada = pulseIn(pinoEcho, HIGH);
+	distanciaEcoada *= velocidadeSom / 2;
 
-	return (intervalo * velocidadeSom / 2);
+	if (distanciaEcoada < MAXIMA_DISTANCIA)
+		deteccoes++;
+	else
+		deteccoes = 0;
+
+	runned();
 }

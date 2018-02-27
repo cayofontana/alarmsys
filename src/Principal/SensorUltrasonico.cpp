@@ -1,6 +1,6 @@
 #include "SensorUltrasonico.h"
 
-SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, int intervalo)
+SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo)
 {
       	this->pinoEcho = pinoEcho;
       	this->pinoTrigger = pinoTrigger;
@@ -25,25 +25,12 @@ SensorUltrasonico::detectar(void)
         {
                 setInterval(frequencia);
                 run();
-
-                Serial.print("Detecções dos pinos ");
-                Serial.print(pinoEcho);
-                Serial.print(" e ");
-                Serial.print(pinoTrigger);
-                Serial.print(": ");
-                Serial.println(deteccoes);
                 
                 if (deteccoes == MINIMO_DETECCAO)
                 {
                         setInterval(intervalo);
                         deteccoes = 0;
                         objetoDetectado = true;
-
-                        Serial.print("OBJETO DETECTADO pelos pinos ");
-                        Serial.print(pinoEcho);
-                        Serial.print(" e ");
-                        Serial.print(pinoTrigger);
-                        Serial.println(". Inativo por 5 segndos.");
                 }
                 else
                         objetoDetectado = false;

@@ -9,8 +9,9 @@ void setup()
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
 
-        sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 500, 15000));
-        sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 500, 15000));
+        sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 300, 15000));
+        sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 300, 15000));
+        sensoresUltrasonicos.push_back(SensorUltrasonico(14, 16, 300, 15000));
 }
 
 void loop()

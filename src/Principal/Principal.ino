@@ -1,13 +1,17 @@
 #include <vector>
 #include "SensorUltrasonico.h"
+#include "Rede.h"
 
 std::vector<SensorUltrasonico> sensoresUltrasonicos;
+Rede rede("CAYO", "abc@123.");
 const uint8_t pinoSirene = 4;
 
 void setup()
 {
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
+
+        rede.desconectar();
 
         sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 300, 15000));
         sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 300, 15000));
@@ -32,7 +36,11 @@ void loop()
         }
 
         if (objetoDetectado)
+        {
                 digitalWrite(pinoSirene, HIGH);
+                if (rede.conectar())
+                        rede.enviarDados("192.168.0.102", 80, "alarme.php", "ALARME ACIONADO! Possível invasor detectado.");
+        }
         else
                 digitalWrite(pinoSirene, LOW);
 }

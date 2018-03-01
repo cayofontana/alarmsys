@@ -38,8 +38,6 @@ bool
 Rede::enviarDados(char *endereco, uint8_t porta, char *arquivo, uint16_t valor)
 {
         WiFiClient cliente;
-        String line;
-        bool conectou = false;
         
         if (cliente.connect(endereco, porta))
         {
@@ -50,16 +48,12 @@ Rede::enviarDados(char *endereco, uint8_t porta, char *arquivo, uint16_t valor)
                 "\r\n"
                 );
                 
-                while (cliente.connected())
-                        if (cliente.available())
-                                line = cliente.readStringUntil('\n');
-                
-                conectou = true;
+                return (true);
         }
         
         cliente.stop();
         
-        return (conectou);
+        return (false);
 }
 
 void

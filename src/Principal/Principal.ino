@@ -35,12 +35,12 @@ void loop()
                 objetoDetectado = true;
         }
 
-        if (objetoDetectado)
+        if (objetoDetectado && digitalRead(pinoSirene) == LOW)
         {
                 digitalWrite(pinoSirene, HIGH);
                 if (rede.conectar())
-                        rede.enviarDados("192.168.0.102", 80, "alarme.php", "ALARME ACIONADO! Possível invasor detectado.");
+                        rede.enviarDados("192.168.0.102", 80, "cadastrodeteccao.php", 10);
         }
-        else
+        else if (!objetoDetectado)
                 digitalWrite(pinoSirene, LOW);
 }

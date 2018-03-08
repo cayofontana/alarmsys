@@ -26,7 +26,6 @@ private:
 
         void executado(unsigned long horario);
         virtual bool deveExecutar(unsigned long horario);
-        void emExecucao(void (*callback)(void));
 };
 
 #endif

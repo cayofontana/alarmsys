@@ -11,8 +11,6 @@ void setup()
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
 
-        rede.desconectar();
-
         sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 300, 15000));
         sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 300, 15000));
         sensoresUltrasonicos.push_back(SensorUltrasonico(14, 16, 300, 15000));

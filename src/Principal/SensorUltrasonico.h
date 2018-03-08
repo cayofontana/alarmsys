@@ -1,9 +1,6 @@
 #ifndef SENSORULTRASONICO_H
 #define SENSORULTRASONICO_H
 
-#include <Arduino.h>
-#include <stdint.h>
-
 #include "Thread.h"
 
 #define MAXIMA_DISTANCIA 50
@@ -26,7 +23,7 @@ private:
       	uint8_t deteccoes;
       	bool objetoDetectado;
       	
-      	void run();
+      	void executar();
 };
 
 #endif

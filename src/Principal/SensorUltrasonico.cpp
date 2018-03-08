@@ -21,16 +21,33 @@ SensorUltrasonico::existeObjeto(void)
 void
 SensorUltrasonico::detectar(void)
 {
-        if (shouldRun())
+        if (deveExecutar())
         {
-                setInterval(frequencia);
-                run();
+                setIntervalo(frequencia);
+                executar();
+
+                // ESTE BLOCO DE CÓDIGO É USADO APENAS PARA TESTE DE SENSIBILIDADE
+                // DOS SENSORES, E DEVERÁ SER REMOVIDO APÓS A CONCLUSÃO DO PROJETO.
+                Serial.print("Pinos ");
+                Serial.print(pinoEcho);
+                Serial.print(" e ");
+                Serial.print(pinoTrigger);
+                Serial.print(": ");
+                Serial.println(deteccoes);
                 
                 if (deteccoes == MINIMO_DETECCAO)
                 {
-                        setInterval(intervalo);
+                        setIntervalo(intervalo);
                         deteccoes = 0;
                         objetoDetectado = true;
+
+                        // ESTE BLOCO DE CÓDIGO É USADO APENAS PARA TESTE DE SENSIBILIDADE
+                        // DOS SENSORES, E DEVERÁ SER REMOVIDO APÓS A CONCLUSÃO DO PROJETO.
+                        Serial.print("OBJETO DETECTADO! Pinos ");
+                        Serial.print(pinoEcho);
+                        Serial.print(" e ");
+                        Serial.print(pinoTrigger);
+                        Serial.println(". Inativo por 15 segundos.");                        
                 }
                 else
                         objetoDetectado = false;
@@ -38,7 +55,7 @@ SensorUltrasonico::detectar(void)
 }
 
 void
-SensorUltrasonico::run()
+SensorUltrasonico::executar()
 {
         digitalWrite(pinoTrigger, LOW);
         delayMicroseconds(2);
@@ -55,5 +72,5 @@ SensorUltrasonico::run()
         else
                 deteccoes = 0;
         
-        runned();
+        executado();
 }

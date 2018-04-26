@@ -1,0 +1,32 @@
+#################################################################################################
+#												#
+#	Sistema de Alarme Multisensoriado							#
+#												#
+#################################################################################################
+
+Monitor:
+
+	Este módulo trata-se de um sistema eletrônico embarcado, desenvolvido para suportar diferentes tipos e quantidade (limitando-se as portas do microcontrolador) de sensores, atuando paralelamente.
+	O programa verifica cada sensor...
+
+	1. INSTALAR
+		
+		a) Java SDK:
+			- sudo apt-get install oracle-java8-jdk;
+
+		b) MySQL Server 5.7 (ou maior):
+			- sudo apt-get install mysql-server;
+
+		c) Lib MySQL Java (Drivers Java para MySQL):
+			- sudo apt-get install libmysql-java;
+			- Adicionar as seguintes linhas de código no final do arquivo ~/.bashrc:
+				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
+				+ export CLASSPATH
+
+	2. COMPILAR
+
+		javac Principal.java
+
+	3. EXECUTAR
+		
+ 		java Principal

@@ -1,0 +1,27 @@
+#################################################################################################
+#												#
+#	Sistema de Alarme Multisensoriado							#
+#												#
+#################################################################################################
+
+Monitor:
+
+	Este módulo trata-se de um sistema eletrônico embarcado, desenvolvido para suportar diferentes tipos e quantidade (limitando-se as portas do microcontrolador) de sensores, atuando paralelamente.
+	O programa verifica cada sensor...
+
+	1. INSTALAR
+
+		a) Apache 2:
+			- sudo apt-get install apache2
+		
+		b) PHP 7.0:
+			- sudo apt-get install php7.0;
+
+		c) PHP MySQL (API MySQLi):
+			- sudo apt-get install php-mysql;
+			Reinicar o Apache2 (para utilizar o pacote acima instalado):
+			- sudo service apache2 restart;
+
+	2. PUBLICAR
+		
+ 		Copiar o(s) arquivo(s) com extensão php para a pasta raiz do servidor Apache 2 (/var/www/html por padrão).

@@ -1,0 +1,24 @@
+#################################################################################################
+#												#
+#	Sistema de Alarme Multisensoriado							#
+#												#
+#################################################################################################
+
+Monitor:
+
+	Este módulo trata-se de um sistema eletrônico embarcado, desenvolvido para suportar diferentes tipos e quantidade (limitando-se as portas do microcontrolador) de sensores, atuando paralelamente.
+	O programa verifica cada sensor...
+
+	1. INSTALAR
+		
+		a) Arduino IDE
+			- www.arduino.cc
+
+		
+
+	2. COMPILAR
+
+		
+
+	3. EXECUTAR
+		

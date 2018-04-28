@@ -28,13 +28,6 @@ class Deteccao
 		configurar();
 	}
 
-	public Deteccao(int id, float valor, String data)
-	{
-		this.id = id;
-		this.valor = valor;
-		this.data = Util.construirData(data);
-	}
-
 	public int getId()
 	{
 		return (id);
@@ -57,7 +50,6 @@ class Deteccao
 	{
 		try
 		{
-
 			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/ALARMSYS?useSSL=false", propriedades);
 			Statement consulta = conexao.createStatement();
 			ResultSet conjuntoDados = consulta.executeQuery("SELECT DETE_ID_DETECCAO, DETE_VL_DISTANCIA_MEDIA, DETE_DT_DETECCAO FROM DETECCAO ORDER BY DETE_ID_DETECCAO DESC LIMIT 1");

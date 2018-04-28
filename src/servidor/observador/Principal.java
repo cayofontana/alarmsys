@@ -8,7 +8,7 @@ class Principal
 			try
 			{
 				if (observador.estadoMudou())
-					ServicoMovel.enviar(observador.getDeteccaoReferencia().imprimir());
+					ServicoMovel.enviarMensagem(observador.getDeteccaoReferencia().imprimir());
 
 				Thread.sleep(10000);
 			}

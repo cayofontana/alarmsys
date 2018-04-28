@@ -2,7 +2,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,11 +11,15 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.apache.http.util.EntityUtils;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 
-class ServicoMovel {
+class ServicoMovel
+{
+	private static final String ESCOPO = "https://www.googleapis.com/auth/firebase.messaging";	
+	private static final String ENDERECO_REQUISICAO = "https://fcm.googleapis.com/v1/projects/fir-teste-c21fa/messages:send";
 
 	private static List<String> tokens;
 
@@ -29,67 +32,57 @@ class ServicoMovel {
 		tokens.add("cVtCXX29Djw:APA91bEzwfUJ-oWKXy96Qb26OyBHICyfPwY7czNicWqLX6DBYyAEqThcy1shNFV1RY4doxhRkoNtiPMKt_B_u4KzlMLRd7tiqEX1aIQ9iy0UDKB81Z33BEhMZrs6uLefqrS0jtK8g52D");
 	}
 
-	//Endereço usado na solicitação de permissão do API do Google
-	private static String SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
-	
-	//Endereço para onde sera enviado o POST
-	private static String url = "https://fcm.googleapis.com/v1/projects/fir-teste-c21fa/messages:send";
-
-	public static void enviar(String mensagem)
+	public static void enviarMensagem(String mensagem)
 	{
-		for (String token : tokens)
-			enviarMensagem(token, mensagem);
-	}
-	
-	//Envia o POST
-	private static void enviarMensagem(String token, String mensagem)
-	{
-		StringEntity postEntity;
-		HttpClient client = HttpClientBuilder.create().build();
+		StringEntity stringJSON;
+		HttpClient clienteHttp = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()).build();
 		
 		try
 		{
-			HttpPost request = new HttpPost(url);
-			request.addHeader("content-type", "application/json");
-			request.addHeader("Authorization", "Bearer " + getAccessToken());
-			postEntity = buildPostEntity(token, mensagem);
-			request.setEntity(postEntity);
-			
-			HttpResponse response = client.execute(request); 
-			HttpEntity responseEntity = response.getEntity();
-			String responseString = EntityUtils.toString(responseEntity);
-			System.out.println("\nResposta:\n" + responseString);
+			for (String token : tokens)
+			{
+				HttpPost requisicaoHttp = new HttpPost(ENDERECO_REQUISICAO);
+				requisicaoHttp.addHeader("content-type", "application/json");
+				requisicaoHttp.addHeader("Authorization", "Bearer " + getTokenAcesso());
+				stringJSON = construirMensagemJSON(token, mensagem);
+				requisicaoHttp.setEntity(stringJSON);
+
+				HttpResponse respostaHttp = clienteHttp.execute(requisicaoHttp); 
+				HttpEntity respostaJSON = respostaHttp.getEntity();
+				String respostaStr = EntityUtils.toString(respostaJSON);
+
+				System.out.println(respostaStr);
+			}
 		}
-		catch (Exception e)
+		catch (UnsupportedEncodingException excecao)
 		{
-			System.out.println(e.getMessage());
+			System.out.println(excecao);
 		}
+		catch (IOException excecao)
+		{
+			System.out.println(excecao);
+		}		
 	}
-	
-	//Constrói uma StringEntity imitando uma estrutura JSON
-	//(Porque eu não sei usar JSON)
-	private static StringEntity buildPostEntity(String token, String body) throws UnsupportedEncodingException
+
+	private static StringEntity construirMensagemJSON(String token, String conteudo) throws UnsupportedEncodingException
 	{
-		String entity =
-				"{\r\n" + 
+		String stringJSON =	"{\r\n" + 
 				"  \"message\":{\r\n" + 
 				"    \"token\" : \"" + token + "\",\r\n" + 
 				"    \"notification\" : {\r\n" + 
-				"      \"body\" : \"" + body + "\",\r\n" + 
+				"      \"body\" : \"" + conteudo + "\",\r\n" + 
 				"      }\r\n" + 
 				"   }\r\n" + 
 				"}";
 		
-		return new StringEntity(entity);
-	}
-	
-	//Pega um token de acesso do Google
-	private static String getAccessToken() throws IOException {
-	    GoogleCredential googleCredential = GoogleCredential
-	        .fromStream(new FileInputStream("recursos/AccessToken.json"))
-	        .createScoped(Arrays.asList(SCOPE));
-	    googleCredential.refreshToken();
-	    return googleCredential.getAccessToken();
+		return (new StringEntity(stringJSON));
 	}
 
+	private static String getTokenAcesso() throws IOException
+	{
+		GoogleCredential credencialGoogle = GoogleCredential.fromStream(new FileInputStream("recursos/AccessToken.json")).createScoped(Arrays.asList(ESCOPO));
+		credencialGoogle.refreshToken();
+
+		return (credencialGoogle.getAccessToken());
+	}
 }

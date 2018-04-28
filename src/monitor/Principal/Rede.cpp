@@ -42,7 +42,7 @@ Rede::enviarDados(char *endereco, uint8_t porta, char *arquivo, uint16_t valor)
         if (cliente.connect(endereco, porta))
         {
                 cliente.print(
-                String("GET /") + arquivo + "?distancia=" + valor + " HTTP/1.1\r\n" +
+                String("GET /") + arquivo + "?distancia_media=" + valor + " HTTP/1.1\r\n" +
                 "Host: " + endereco + "\r\n" +
                 "Connection: close\r\n" +
                 "\r\n"

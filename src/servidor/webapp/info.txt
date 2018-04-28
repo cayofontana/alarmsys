@@ -13,14 +13,16 @@ Monitor:
 
 		a) Apache 2:
 			- sudo apt-get install apache2
+			Habilitar a porta 80 pelo UFW (Uncomplicated Firewall) do Ubuntu:
+			- sudo ufw allow 80
 		
 		b) PHP 7.0:
 			- sudo apt-get install php7.0;
 
 		c) PHP MySQL (API MySQLi):
-			- sudo apt-get install php-mysql;
+			- sudo apt-get install php-mysql
 			Reinicar o Apache2 (para utilizar o pacote acima instalado):
-			- sudo service apache2 restart;
+			- sudo service apache2 restart
 
 	2. PUBLICAR
 		

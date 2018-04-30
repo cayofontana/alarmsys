@@ -28,11 +28,11 @@ Monitor:
 		Windows:
 			javac -d bin -cp recursos\lib\*; Principal.java
 		Linux:
-			javac -d bin -cp recursos/lib2/*: Principal.java
+			javac -d bin -cp recursos/lib/*: Principal.java
 
 	3. EXECUTAR
 
 		Windows:
 			java -cp recursos\lib\*;bin Principal
 		Linux:
-			java -cp recursos/lib2/*:/usr/share/java/mysql.jar:bin Principal
+			java -cp recursos/lib/*:/usr/share/java/mysql.jar:bin Principal

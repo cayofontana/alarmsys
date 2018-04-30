@@ -13,6 +13,8 @@ Monitor:
 
 		a) TomCat 8:
 			- sudo apt-get install tomcat8
+			Habilitar a porta 8080 pelo UFW (Uncomplicated Firewall) do Ubuntu:
+			- sudo ufw allow 8080
 		
 		a) Java SDK:
 			- sudo apt-get install oracle-java8-jdk;

@@ -1,11 +1,13 @@
 #include "SensorUltrasonico.h"
 
-SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo)
+SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t distancia, uint16_t limiteDeteccoes)
 {
       	this->pinoEcho = pinoEcho;
       	this->pinoTrigger = pinoTrigger;
       	this->frequencia = frequencia;
       	this->intervalo = intervalo;
+        this->distancia = distancia;
+        this->limiteDeteccoes = limiteDeteccoes;
       	distanciaEcoada = deteccoes = 0;
       	objetoDetectado = false;
       	pinMode(pinoEcho, INPUT);
@@ -35,7 +37,7 @@ SensorUltrasonico::detectar(void)
                 Serial.print(": ");
                 Serial.println(deteccoes);
                 
-                if (deteccoes == MINIMO_DETECCAO)
+                if (deteccoes == limiteDeteccoes)
                 {
                         setIntervalo(intervalo);
                         deteccoes = 0;
@@ -67,7 +69,7 @@ SensorUltrasonico::executar()
         distanciaEcoada = pulseIn(pinoEcho, HIGH);
         distanciaEcoada *= velocidadeSom / 2;
         
-        if (distanciaEcoada < MAXIMA_DISTANCIA)
+        if (distanciaEcoada < distancia)
                 deteccoes++;
         else
                 deteccoes = 0;

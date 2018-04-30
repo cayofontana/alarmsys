@@ -3,13 +3,10 @@
 
 #include "Thread.h"
 
-#define MAXIMA_DISTANCIA 50
-#define MINIMO_DETECCAO 30
-
 class SensorUltrasonico: public Thread
 {
 public:
-        SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo);
+        SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t distancia, uint16_t limiteDeteccoes);
         bool existeObjeto(void);
         void detectar(void);
 
@@ -20,6 +17,8 @@ private:
       	unsigned long distanciaEcoada;
       	uint16_t frequencia;
       	uint16_t intervalo;
+        uint16_t distancia;
+        uint16_t limiteDeteccoes;
       	uint8_t deteccoes;
       	bool objetoDetectado;
       	

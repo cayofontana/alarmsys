@@ -11,19 +11,29 @@ Monitor:
 
 	1. INSTALAR
 
-		a) Apache 2:
-			- sudo apt-get install apache2
-			Habilitar a porta 80 pelo UFW (Uncomplicated Firewall) do Ubuntu:
-			- sudo ufw allow 80
+		a) TomCat 8:
+			- sudo apt-get install tomcat8
 		
-		b) PHP 7.0:
-			- sudo apt-get install php7.0;
+		a) Java SDK:
+			- sudo apt-get install oracle-java8-jdk;
 
-		c) PHP MySQL (API MySQLi):
-			- sudo apt-get install php-mysql
-			Reinicar o Apache2 (para utilizar o pacote acima instalado):
-			- sudo service apache2 restart
+		b) MySQL Server 5.7 (ou maior):
+			- sudo apt-get install mysql-server;
+
+		c) Lib MySQL Java (Drivers Java para MySQL):
+			- sudo apt-get install libmysql-java;
+			- Adicionar as seguintes linhas de código no final do arquivo ~/.bashrc:
+				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
+				+ export CLASSPATH
 
 	2. PUBLICAR
 		
- 		Copiar o(s) arquivo(s) com extensão php para a pasta raiz do servidor Apache 2 (/var/www/html por padrão).
+		a) Criar o diretório 'WEB-INF/lib/' em /var/lib/tomcat8/webapps/ROOT
+		
+		b) Copiar a biblioteca mysql.jar (de /usr/share/java/mysql.jar) e colar em /var/lib/tomcat8/webapps/ROOT/WEB-INF/lib/
+
+ 		c) Copiar o(s) arquivo(s) com extensão jsp para a pasta raiz do servidor TomCat 8 (/var/lib/tomcat8/webapps/ROOT por padrão)
+
+ 	3. EXECUTAR
+
+ 		Abrir o navegador (qualquer) e digitar, na barra de endereços, a url http://127.0.0.1:8080/cadastrodeteccao.jsp?distancia_media=54.19 (por exemplo).

@@ -10,11 +10,12 @@ public:
         void detectar(void);
 
 private:
+        uint8_t pinoTrigger;
       	const float velocidadeSom = 0.034;
       	unsigned long distanciaEcoada;
       	uint16_t distancia;
       	
-      	void executar();
+      	void executar(void);
 };
 
 #endif

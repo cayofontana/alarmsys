@@ -1,9 +1,8 @@
 #include "Sensor.h"
 
-Sensor::Sensor(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t limiteDeteccoes)
+Sensor::Sensor(uint8_t pinoEcho, uint16_t frequencia, uint16_t intervalo, uint16_t limiteDeteccoes)
 {
       	this->pinoEcho = pinoEcho;
-      	this->pinoTrigger = pinoTrigger;
       	this->frequencia = frequencia;
       	this->intervalo = intervalo;
         this->limiteDeteccoes = limiteDeteccoes;
@@ -23,12 +22,6 @@ uint8_t
 Sensor::getPinoEcho()
 {
         return (pinoEcho);
-}
-
-uint8_t
-Sensor::getPinoTrigger()
-{
-        return (pinoTrigger);
 }
 
 bool

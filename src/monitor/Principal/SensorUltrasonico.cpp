@@ -1,8 +1,9 @@
 #include "SensorUltrasonico.h"
 
 SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t distancia, uint16_t limiteDeteccoes)
-    : Sensor(pinoEcho, pinoTrigger, frequencia, intervalo, limiteDeteccoes)
+    : Sensor(pinoEcho, frequencia, intervalo, limiteDeteccoes)
 {
+        this->pinoTrigger = pinoTrigger;
       	this->distancia = distancia;
       	distanciaEcoada = 0;
 }
@@ -19,14 +20,14 @@ SensorUltrasonico::detectar(void)
 }
 
 void
-SensorUltrasonico::executar()
+SensorUltrasonico::executar(void)
 {
-        digitalWrite(getPinoTrigger(), LOW);
+        digitalWrite(pinoTrigger, LOW);
         delayMicroseconds(2);
         
-        digitalWrite(getPinoTrigger(), HIGH);
+        digitalWrite(pinoTrigger, HIGH);
         delayMicroseconds(10);
-        digitalWrite(getPinoTrigger(), LOW);
+        digitalWrite(pinoTrigger, LOW);
         
         distanciaEcoada = pulseIn(getPinoEcho(), HIGH);
         distanciaEcoada *= velocidadeSom / 2;

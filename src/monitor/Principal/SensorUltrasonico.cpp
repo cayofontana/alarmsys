@@ -1,23 +1,10 @@
 #include "SensorUltrasonico.h"
 
 SensorUltrasonico::SensorUltrasonico(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t distancia, uint16_t limiteDeteccoes)
+    : Sensor(pinoEcho, pinoTrigger, frequencia, intervalo, limiteDeteccoes)
 {
-      	this->pinoEcho = pinoEcho;
-      	this->pinoTrigger = pinoTrigger;
-      	this->frequencia = frequencia;
-      	this->intervalo = intervalo;
-        this->distancia = distancia;
-        this->limiteDeteccoes = limiteDeteccoes;
-      	distanciaEcoada = deteccoes = 0;
-      	objetoDetectado = false;
-      	pinMode(pinoEcho, INPUT);
-      	pinMode(pinoTrigger, OUTPUT);
-}
-
-bool
-SensorUltrasonico::existeObjeto(void)
-{
-        return (objetoDetectado);
+      	this->distancia = distancia;
+      	distanciaEcoada = 0;
 }
 
 void
@@ -25,54 +12,29 @@ SensorUltrasonico::detectar(void)
 {
         if (deveExecutar())
         {
-                setIntervalo(frequencia);
+                setIntervalo(getFrequencia());
                 executar();
-
-                // ESTE BLOCO DE CÓDIGO É USADO APENAS PARA TESTE DE SENSIBILIDADE
-                // DOS SENSORES, E DEVERÁ SER REMOVIDO APÓS A CONCLUSÃO DO PROJETO.
-                Serial.print("Pinos ");
-                Serial.print(pinoEcho);
-                Serial.print(" e ");
-                Serial.print(pinoTrigger);
-                Serial.print(": ");
-                Serial.println(deteccoes);
-                
-                if (deteccoes == limiteDeteccoes)
-                {
-                        setIntervalo(intervalo);
-                        deteccoes = 0;
-                        objetoDetectado = true;
-
-                        // ESTE BLOCO DE CÓDIGO É USADO APENAS PARA TESTE DE SENSIBILIDADE
-                        // DOS SENSORES, E DEVERÁ SER REMOVIDO APÓS A CONCLUSÃO DO PROJETO.
-                        Serial.print("OBJETO DETECTADO! Pinos ");
-                        Serial.print(pinoEcho);
-                        Serial.print(" e ");
-                        Serial.print(pinoTrigger);
-                        Serial.println(". Inativo por 15 segundos.");                        
-                }
-                else
-                        objetoDetectado = false;
+                Sensor::detectar();
         }
 }
 
 void
 SensorUltrasonico::executar()
 {
-        digitalWrite(pinoTrigger, LOW);
+        digitalWrite(getPinoTrigger(), LOW);
         delayMicroseconds(2);
         
-        digitalWrite(pinoTrigger, HIGH);
+        digitalWrite(getPinoTrigger(), HIGH);
         delayMicroseconds(10);
-        digitalWrite(pinoTrigger, LOW);
+        digitalWrite(getPinoTrigger(), LOW);
         
-        distanciaEcoada = pulseIn(pinoEcho, HIGH);
+        distanciaEcoada = pulseIn(getPinoEcho(), HIGH);
         distanciaEcoada *= velocidadeSom / 2;
         
         if (distanciaEcoada < distancia)
-                deteccoes++;
+                aumentarDeteccoes();
         else
-                deteccoes = 0;
+                resetarDeteccoes();
         
         executado();
 }

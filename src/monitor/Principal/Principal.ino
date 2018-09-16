@@ -1,8 +1,8 @@
 #include <vector>
-#include "SensorUltrasonico.h"
+#include "Sensor.h"
 #include "Rede.h"
 
-std::vector<SensorUltrasonico> sensoresUltrasonicos;
+std::vector<Sensor> sensores;
 Rede rede("CAYO", "abc@123.");
 const uint8_t pinoSirene = 4;
 
@@ -11,21 +11,21 @@ void setup()
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
 
-        sensoresUltrasonicos.push_back(SensorUltrasonico(12, 13, 300, 15000, 50, 20));
-        sensoresUltrasonicos.push_back(SensorUltrasonico(5, 2, 300, 15000, 50, 20));
-        sensoresUltrasonicos.push_back(SensorUltrasonico(14, 16, 300, 15000, 50, 20));
+        sensores.push_back(Ultrassom(12, 13, 300, 15000, 50, 20));
+        sensores.push_back(Ultrassom(5, 2, 300, 15000, 50, 20));
+        sensores.push_back(Ultrassom(14, 16, 300, 15000, 50, 20));
 }
 
 void loop()
 {
         bool objetoDetectado;
         
-        for (std::vector<SensorUltrasonico>::iterator sensorUltrasonico = sensoresUltrasonicos.begin(); sensorUltrasonico != sensoresUltrasonicos.end(); ++sensorUltrasonico)
-                sensorUltrasonico->detectar();
+        for (std::vector<Sensor>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
+                sensor->detectar();
 
-        for (std::vector<SensorUltrasonico>::iterator sensorUltrasonico = sensoresUltrasonicos.begin(); sensorUltrasonico != sensoresUltrasonicos.end(); ++sensorUltrasonico)
+        for (std::vector<Sensor>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
         {
-                if (!sensorUltrasonico->existeObjeto())
+                if (!sensor->existeObjeto())
                 {
                         objetoDetectado = false;
                         break;

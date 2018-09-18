@@ -20,7 +20,7 @@ void setup()
 
 void loop()
 {
-        bool objetoDetectado;
+        bool objetoDetectado = false;
         
         for (std::vector<std::shared_ptr<Sensor>>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
                 (*sensor)->detectar();

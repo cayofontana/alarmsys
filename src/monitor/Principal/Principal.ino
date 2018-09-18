@@ -1,8 +1,10 @@
 #include <vector>
 #include "Sensor.h"
+#include "Ultrassom.h"
+#include "InfraVermelho.h"
 #include "Rede.h"
 
-std::vector<Sensor> sensores;
+std::vector<std::shared_ptr<Sensor>> sensores;
 Rede rede("CAYO", "abc@123.");
 const uint8_t pinoSirene = 4;
 
@@ -11,21 +13,21 @@ void setup()
         Serial.begin(115200);
         pinMode(pinoSirene, OUTPUT);
 
-        sensores.push_back(Ultrassom(12, 13, 300, 15000, 50, 20));
-        sensores.push_back(Ultrassom(5, 2, 300, 15000, 50, 20));
-        sensores.push_back(Ultrassom(14, 16, 300, 15000, 50, 20));
+        sensores.push_back(std::make_shared<Ultrassom>(12, 300, 15000, 13, 50, 20));
+        sensores.push_back(std::make_shared<Ultrassom>(5, 300, 15000, 2, 50, 20));
+        sensores.push_back(std::make_shared<InfraVermelho>(14, 10, 15000));
 }
 
 void loop()
 {
         bool objetoDetectado;
         
-        for (std::vector<Sensor>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
-                sensor->detectar();
+        for (std::vector<std::shared_ptr<Sensor>>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
+                (*sensor)->detectar();
 
-        for (std::vector<Sensor>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
+        for (std::vector<std::shared_ptr<Sensor>>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor)
         {
-                if (!sensor->existeObjeto())
+                if (!(*sensor)->existeObjeto())
                 {
                         objetoDetectado = false;
                         break;

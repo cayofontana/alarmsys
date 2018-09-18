@@ -6,24 +6,23 @@
 class Sensor: public Thread
 {
 public:
-        Sensor(uint8_t pinoEcho, uint8_t pinoTrigger, uint16_t frequencia, uint16_t intervalo, uint16_t limiteDeteccoes);
+        Sensor(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo);
 
-        uint16_t getFrequencia();
-        uint8_t getPinoEcho();
-        
         bool existeObjeto(void);
-        void detectar(void);
+        virtual void detectar(void) = 0;
 
-        void aumentarDeteccoes();
-        void resetarDeteccoes();
+protected:
+	bool objetoDetectado;
+
+	uint8_t getPinoEntrada(void);
+	uint16_t getFrequencia(void);
+        uint16_t getIntervalo(void);
 
 private:
-        uint8_t pinoEcho;
+        uint8_t pinoEntrada;
         uint16_t frequencia;
         uint16_t intervalo;
-        uint16_t limiteDeteccoes;
-	uint8_t deteccoes;
-        bool objetoDetectado;
+
 };
 
 #endif

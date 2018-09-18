@@ -7,18 +7,20 @@ InfraVermelho::InfraVermelho(uint8_t pinoEntrada, uint16_t frequencia, uint16_t 
 void
 InfraVermelho::detectar(void)
 {
-	if (deveExecutar())
-	{
-		setIntervalo(getIntervalo());
-		executar();
-		detectar();
-	}
+        if (deveExecutar())
+        {
+                setIntervalo(getIntervalo());
+                executar();
+        }
 }
 
 void
 InfraVermelho::executar(void)
 {
-	int valorSensoriado = digitalRead(getPinoEntrada());
-
-	executado();
+        if (digitalRead(getPinoEntrada()) > 0)
+                objetoDetectado = true;
+        else
+                objetoDetectado = false;
+        
+        executado();
 }

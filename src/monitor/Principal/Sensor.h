@@ -12,10 +12,10 @@ public:
         virtual void detectar(void) = 0;
 
 protected:
-	bool objetoDetectado;
+        bool objetoDetectado;
 
-	uint8_t getPinoEntrada(void);
-	uint16_t getFrequencia(void);
+        uint8_t getPinoEntrada(void);
+        uint16_t getFrequencia(void);
         uint16_t getIntervalo(void);
 
 private:

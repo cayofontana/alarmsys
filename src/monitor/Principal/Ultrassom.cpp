@@ -2,7 +2,7 @@
 
 Ultrassom:: Ultrassom(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo, uint8_t pinoSaida, uint16_t distancia, uint16_t limiteDeteccoes) : Sensor(pinoEntrada, frequencia, intervalo)
 {
-	this->pinoSaida = pinoSaida;
+        this->pinoSaida = pinoSaida;
         this->distancia = distancia;
         this->limiteDeteccoes = limiteDeteccoes;
         distanciaEcoada = 0;

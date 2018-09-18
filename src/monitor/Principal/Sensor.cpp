@@ -5,6 +5,7 @@ Sensor::Sensor(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo)
       	this->pinoEntrada = pinoEntrada;
       	this->frequencia = frequencia;
       	this->intervalo = intervalo;
+      	objetoDetectado = false;
       	pinMode(this->pinoEntrada, INPUT);
 }
 

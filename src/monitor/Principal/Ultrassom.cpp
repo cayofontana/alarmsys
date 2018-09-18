@@ -7,7 +7,6 @@ Ultrassom:: Ultrassom(uint8_t pinoEntrada, uint16_t frequencia, uint16_t interva
         this->limiteDeteccoes = limiteDeteccoes;
         distanciaEcoada = 0;
         deteccoes = 0;
-        objetoDetectado = false;
       	pinMode(this->pinoSaida, OUTPUT);
 }
 

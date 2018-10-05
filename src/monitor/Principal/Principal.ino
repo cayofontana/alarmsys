@@ -6,7 +6,7 @@
 
 std::vector<std::shared_ptr<Sensor>> sensores;
 Rede rede("CAYO", "abc@123.");
-const uint8_t pinoSirene = 4;
+const uint8_t pinoSirene = 16;
 
 void setup()
 {

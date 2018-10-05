@@ -22,7 +22,7 @@ InfraVermelho::executar(void)
                 objetoDetectado = true;
                 Serial.print("Pino ");
                 Serial.print(getPinoEntrada());
-                Serial.print(" detectou!");
+                Serial.println(" detectou!");
         }
         else
                 objetoDetectado = false;

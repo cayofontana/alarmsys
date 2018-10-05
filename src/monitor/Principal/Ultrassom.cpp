@@ -55,9 +55,10 @@ Ultrassom::executar(void)
         delayMicroseconds(10);
         digitalWrite(pinoSaida, LOW);
         
-        distanciaEcoada = pulseIn(getFrequencia(), HIGH);
+        distanciaEcoada = pulseIn(getPinoEntrada(), HIGH);
         distanciaEcoada *= velocidadeSom / 2;
-        
+        Serial.print("Distância: ");
+        Serial.println(distanciaEcoada);
         if (distanciaEcoada < distancia)
                 deteccoes++;
         else

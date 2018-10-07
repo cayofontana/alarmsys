@@ -18,12 +18,7 @@ void
 InfraVermelho::executar(void)
 {
         if (digitalRead(getPinoEntrada()) > 0)
-        {
                 objetoDetectado = true;
-                Serial.print("Pino ");
-                Serial.print(getPinoEntrada());
-                Serial.println(" detectou!");
-        }
         else
                 objetoDetectado = false;
         

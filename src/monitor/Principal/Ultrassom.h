@@ -7,6 +7,7 @@ class Ultrassom: public Sensor
 {
 public:
         Ultrassom(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo, uint8_t pinoSaida, uint16_t distancia, uint16_t limiteDeteccoes);
+        
         void detectar(void);
 
 private:

@@ -7,6 +7,7 @@ class Thread
 {
 protected:
         Thread();
+        
         virtual void setIntervalo(unsigned long intervalo);
         virtual void executar();
         bool deveExecutar()

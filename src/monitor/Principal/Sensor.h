@@ -22,7 +22,6 @@ private:
         uint8_t pinoEntrada;
         uint16_t frequencia;
         uint16_t intervalo;
-
 };
 
 #endif

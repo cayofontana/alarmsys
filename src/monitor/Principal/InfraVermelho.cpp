@@ -12,6 +12,7 @@ InfraVermelho::detectar(void)
                 setIntervalo(getFrequencia());
                 executar();
 
+                Serial.println("Tentando detectar.");
                 if (objetoDetectado)
                         setIntervalo(getIntervalo());
         }
@@ -20,12 +21,16 @@ InfraVermelho::detectar(void)
 void
 InfraVermelho::executar(void)
 {
-        if (digitalRead(getPinoEntrada()) > 0)
+        int valorEntrada = digitalRead(getPinoEntrada());
+        Serial.println(valorEntrada);
+        if (valorEntrada > 0)
         {
                 objetoDetectado = true;
                 Serial.print("OBJETO DETECTADO! Pino ");
                 Serial.print(getPinoEntrada());
-                Serial.println(". Inativo por 15 segundos.");
+                Serial.print(". Inativo por ");
+                Serial.print(getIntervalo() / 1000);
+                Serial.println(" segundos.");
         }
         else
                 objetoDetectado = false;

@@ -38,7 +38,9 @@ Ultrassom::detectar(void)
                         Serial.print(getPinoEntrada());
                         Serial.print(" e ");
                         Serial.print(pinoSaida);
-                        Serial.println(". Inativo por 15 segundos.");                        
+                        Serial.print(". Inativo por ");
+                        Serial.print(getIntervalo() / 1000);
+                        Serial.println(" segundos.");
                 }
                 else
                         objetoDetectado = false;

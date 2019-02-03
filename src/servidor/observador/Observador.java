@@ -1,3 +1,5 @@
+package observador;
+
 public class Observador
 {
 	private Deteccao deteccaoReferencia;

@@ -1,3 +1,5 @@
+package observador;
+
 class Principal
 {
 	public static void main(String[] args)

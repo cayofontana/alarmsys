@@ -1,3 +1,5 @@
+package observador;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -121,7 +123,7 @@ class ServicoMovel
 
 	private static String getTokenAcesso() throws IOException
 	{
-		GoogleCredential credencialGoogle = GoogleCredential.fromStream(new FileInputStream("recursos/alarmsys-4c2f7-firebase-adminsdk-hp4xq-375c23ca94.json")).createScoped(Arrays.asList(ESCOPO));
+		GoogleCredential credencialGoogle = GoogleCredential.fromStream(new FileInputStream("observador/recursos/alarmsys-4c2f7-firebase-adminsdk-hp4xq-375c23ca94.json")).createScoped(Arrays.asList(ESCOPO));
 		credencialGoogle.refreshToken();
 
 		return (credencialGoogle.getAccessToken());

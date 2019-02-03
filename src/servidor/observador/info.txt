@@ -26,13 +26,13 @@ Monitor:
 	2. COMPILAR
 
 		Windows:
-			javac -d bin -cp recursos\lib\*; Principal.java
+			javac -d bin -cp observador\recursos\lib\*; observador/Principal.java
 		Linux:
-			javac -d bin -cp recursos/lib/*: Principal.java
+			javac -d bin -cp observador/recursos/lib/*: observador/Principal.java
 
 	3. EXECUTAR
 
 		Windows:
-			java -cp recursos\lib\*;bin Principal
+			java -cp observador\recursos\lib\*;observador\bin observador.Principal
 		Linux:
-			java -cp recursos/lib/*:/usr/share/java/mysql.jar:bin Principal
+			java -cp observador/recursos/lib/*:/usr/share/java/mysql.jar:observador/bin observador.Principal

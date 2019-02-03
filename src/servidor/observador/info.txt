@@ -26,9 +26,9 @@ Monitor:
 	2. COMPILAR
 
 		Windows:
-			javac -d bin -cp observador\recursos\lib\*; observador/Principal.java
+			javac -d observador\bin -cp observador\recursos\lib\*; observador/Principal.java
 		Linux:
-			javac -d bin -cp observador/recursos/lib/*: observador/Principal.java
+			javac -d observador/bin -cp observador/recursos/lib/*: observador/Principal.java
 
 	3. EXECUTAR
 

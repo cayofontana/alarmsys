@@ -10,7 +10,7 @@ class Principal
 			try
 			{
 				if (observador.estadoMudou())
-					ServicoMovel.enviarMensagem(observador.getDeteccaoReferencia().imprimir(), observador.getDeteccaoReferencia().obterValores());
+					ServicoMovel.enviarMensagem(Token.listar(), observador.getDeteccaoReferencia().imprimir(), observador.getDeteccaoReferencia().obterValores());
 
 				Thread.sleep(5000);
 			}

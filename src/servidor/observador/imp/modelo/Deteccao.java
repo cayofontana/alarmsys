@@ -1,19 +1,13 @@
 package imp.modelo;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Date;
-import java.util.Properties;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import java.lang.reflect.InvocationTargetException;
 
 import imp.infraestrutura.Util;
+import imp.modelo.persistencia.AcessoDados;
 
 public class Deteccao
 {
@@ -21,19 +15,18 @@ public class Deteccao
 	private float valor;
 	private Date data;
 
-	private Connection conexao;
-	private Properties propriedades;
+	private AcessoDados acessoDados;
+
+	public Deteccao(AcessoDados acessoDados)
+	{
+		this.acessoDados = acessoDados;
+	}
 
 	public Deteccao()
 	{
 		id = 0;
 		valor = 0.0F;
 		data = null;
-
-		conexao = null;
-		propriedades = new Properties();
-		
-		configurar();
 	}
 
 	public int getId()
@@ -41,15 +34,13 @@ public class Deteccao
 		return (id);
 	}
 
-	public String imprimir()
+	public String obterInformacoes()
 	{
 		String strInfo;
 
 		strInfo = "id: " + id + "\n";
 		strInfo += "valor: " + valor + "\n";
 		strInfo += "datahora: " + Util.obterTexto(data);
-
-		System.out.println(strInfo);
 
 		return (strInfo);
 	}
@@ -67,56 +58,29 @@ public class Deteccao
 
 	public void preencherUltima()
 	{
-		try
-		{
-			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/ALARMSYS?useSSL=false", propriedades);
-			Statement consulta = conexao.createStatement();
-			ResultSet conjuntoDados = consulta.executeQuery("SELECT DETE_ID_DETECCAO, DETE_VL_DISTANCIA_MEDIA, DETE_DT_DETECCAO FROM DETECCAO ORDER BY DETE_ID_DETECCAO DESC LIMIT 1");
+		Deteccao deteccao = null;
+		List<String> objetos = new ArrayList<>();
+		String sqlConsulta;
+		int quantidadeColunas = 0, i = 0;
 
-			if (conjuntoDados.next())
-			{
-				id = conjuntoDados.getInt(1);
-				valor = conjuntoDados.getFloat(2);
-				data = Util.construirData(conjuntoDados.getString(3));
-			}
-			
-			conexao.close();
-		}
-		catch (SQLException excecao)
-		{
-			System.out.println(excecao);
-		}
-	}
+		sqlConsulta = "SELECT ";
+		sqlConsulta += "DETE_ID_DETECCAO, ";
+		quantidadeColunas++;
+		sqlConsulta += "DETE_VL_DISTANCIA_MEDIA, ";
+		quantidadeColunas++;
+		sqlConsulta += "DETE_DT_DETECCAO ";
+		quantidadeColunas++;
+		sqlConsulta += "FROM DETECCAO ";
+		sqlConsulta += "ORDER BY DETE_ID_DETECCAO ";
+		sqlConsulta += "DESC LIMIT 1";
 
-	private void configurar()
-	{
-		propriedades.put("user", "monitor");
-		propriedades.put("password", "ifes2018");
+		objetos = acessoDados.listar(sqlConsulta);
 
-		try
+		if (!objetos.isEmpty())
 		{
-			Class<?> classe = Class.forName("com.mysql.jdbc.Driver");
-			classe.getDeclaredConstructor().newInstance();
-		}
-		catch (ClassNotFoundException excecao)
-		{
-			System.out.println(excecao);
-		}
-		catch (IllegalAccessException excecao)
-		{
-			System.out.println(excecao);
-		}
-		catch (NoSuchMethodException excecao)
-		{
-			System.out.println(excecao);
-		}
-		catch (InstantiationException excecao)
-		{
-			System.out.println(excecao);
-		}
-		catch (InvocationTargetException excecao)
-		{
-			System.out.println(excecao);
+			id = Integer.parseInt(objetos.get(i++));
+			valor = Float.parseFloat(objetos.get(i++));
+			data = Util.construirData(objetos.get(i++));
 		}
 	}
 }

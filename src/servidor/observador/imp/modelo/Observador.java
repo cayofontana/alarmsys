@@ -1,12 +1,14 @@
 package imp.modelo;
 
+import imp.modelo.persistencia.AcessoDados;
+
 public class Observador
 {
 	private Deteccao deteccaoReferencia;
 
-	public Observador()
+	public Observador(AcessoDados acessoDados)
 	{
-		deteccaoReferencia = new Deteccao();
+		deteccaoReferencia = new Deteccao(acessoDados);
 
 		deteccaoReferencia.preencherUltima();
 	}
@@ -16,9 +18,9 @@ public class Observador
 		return (deteccaoReferencia);
 	}
 
-	public boolean estadoMudou()
+	public boolean estadoMudou(AcessoDados acessoDados)
 	{
-		Deteccao deteccao = new Deteccao();
+		Deteccao deteccao = new Deteccao(acessoDados);
 		deteccao.preencherUltima();
 		
 		if (deteccao == null)

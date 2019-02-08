@@ -33,6 +33,6 @@ Monitor:
 	3. EXECUTAR
 
 		Windows:
-			java -cp observador\recursos\lib\*;observador\bin observador.Principal
+			java -cp recursos\lib\*;bin imp.Principal
 		Linux:
-			java -cp observador/recursos/lib/*:/usr/share/java/mysql.jar:observador/bin observador.Principal
+			java -cp recursos/lib/*:/usr/share/java/mysql.jar:bin imp.Principal

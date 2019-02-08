@@ -26,9 +26,9 @@ Monitor:
 	2. COMPILAR
 
 		Windows:
-			javac -d observador\bin -cp observador\recursos\lib\*; observador/Principal.java
+			if not exist bin\ mkdir bin\ && del /s /q bin\ javac -d bin -cp recursos\lib\*; imp\Principal.java
 		Linux:
-			javac -d observador/bin -cp observador/recursos/lib/*: observador/Principal.java
+			mkdir -p bin/ && rm -rf bin/* && javac -d bin -cp recursos/lib/*: imp/Principal.java
 
 	3. EXECUTAR
 

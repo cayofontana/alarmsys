@@ -16,7 +16,7 @@ void setup()
 
         sensores.push_back(std::make_shared<Ultrassom>(5, 300, 15000, 4, 50, 20));
         sensores.push_back(std::make_shared<Ultrassom>(12, 300, 15000, 13, 50, 20));
-//        sensores.push_back(std::make_shared<InfraVermelho>(0, 10, 15000));
+        sensores.push_back(std::make_shared<InfraVermelho>(0, 10, 15000));
 }
 
 void loop()

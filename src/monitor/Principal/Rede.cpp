@@ -1,6 +1,6 @@
 #include "Rede.h"
 
-Rede::Rede(char *nome, char *senha)
+Rede::Rede(const char *nome, const char *senha)
 {
         this->nome = nome;
         this->senha = senha;
@@ -35,7 +35,7 @@ Rede::conectar(void)
 }
 
 bool
-Rede::enviarDados(char *endereco, uint8_t porta, char *arquivo, uint16_t valor)
+Rede::enviarDados(const char *endereco, uint16_t porta, const char *arquivo, uint16_t valor)
 {
         WiFiClient cliente;
         

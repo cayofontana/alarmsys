@@ -11,6 +11,7 @@ public:
         void detectar(void);
 
 private:
+        int valorEntrada;
         void executar(void);
 };
 

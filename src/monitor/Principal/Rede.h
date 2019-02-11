@@ -6,15 +6,15 @@
 class Rede
 {
 public:
-        Rede(char *nome, char *senha);
+        Rede(const char *nome, const char *senha);
         
         bool conectar(void);
-        bool enviarDados(char *endereco, uint8_t porta, char *arquivo, uint16_t valor);
+        bool enviarDados(const char *endereco, uint16_t porta, const char *arquivo, uint16_t valor);
         void desconectar(void);
 
 private:
-        char *nome;
-        char *senha;
+        const char *nome;
+        const char *senha;
         
         void criarConexao(void);
         bool estahConectado(void);

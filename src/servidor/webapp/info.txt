@@ -38,4 +38,6 @@ Monitor:
 
  	3. EXECUTAR
 
+ 		Abrir o navegador (qualquer) e digitar, na barra de endereços, a url http://127.0.0.1:8080/cadastrotoken.jsp.
+ 		ou
  		Abrir o navegador (qualquer) e digitar, na barra de endereços, a url http://127.0.0.1:8080/cadastrodeteccao.jsp?distancia_media=54.19 (por exemplo).

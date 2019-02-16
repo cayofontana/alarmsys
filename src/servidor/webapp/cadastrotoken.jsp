@@ -27,7 +27,7 @@
 					Class.forName("com.mysql.jdbc.Driver").newInstance(); 
 					Connection conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/ALARMSYS", "monitor", "ifes2018");
 					Statement consulta = conexao.createStatement();
-					consulta.execute("INSERT INTO TOKEN (TOKE_ID_TOKEN, TOKE_DT_CADASTRO) VALUES (\" + token + \", NOW());");
+					consulta.execute("INSERT INTO TOKEN (TOKE_ID_TOKEN, TOKE_DT_CADASTRO) VALUES ('" + token + "', NOW());");
 					conexao.close();
 					out.println("Token inserido com sucesso!");
 				}

@@ -28,11 +28,11 @@ Monitor:
 		Windows:
 			if not exist bin\ mkdir bin\ && del /s /q bin\ javac -d bin -cp recursos\lib\*; imp\Principal.java
 		Linux:
-			mkdir -p bin/ && rm -rf bin/* && javac -d bin/ -cp recursos/lib/*: imp/Principal.java
+			mkdir -p bin/ && rm -rf bin/* && javac -d bin/ -classpath .:classes:/opt/pi4j/lib/'*':recursos/lib/'*' imp/Principal.java
 
 	3. EXECUTAR
 
 		Windows:
 			java -cp recursos\lib\*;bin imp.Principal
 		Linux:
-			java -cp recursos/lib/*:/usr/share/java/mysql.jar:bin/ imp.Principal
+			java -Dpi4j.linking=dynamic -classpath .:/opt/pi4j/lib/'*':recursos/lib/'*':/usr/share/java/mysql.jar:bin/ imp.Principal

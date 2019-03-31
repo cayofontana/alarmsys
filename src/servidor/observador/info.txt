@@ -23,6 +23,12 @@ Monitor:
 				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
 				+ export CLASSPATH
 
+		d) WiringPI
+			- tar xvf wiringPi_2.46.tgz && sudo ./wiringPi-8d188fa/build && sudo ldconfig (diretório ~/recursos/lib/);
+
+		e) Pi4J:
+			- sudo dpkg -i pi4j-1.1.deb (diretório ~/recursos/lib/);
+
 	2. COMPILAR
 
 		Windows:
@@ -36,3 +42,16 @@ Monitor:
 			java -cp recursos\lib\*;bin imp.Principal
 		Linux:
 			java -Dpi4j.linking=dynamic -classpath .:/opt/pi4j/lib/'*':recursos/lib/'*':/usr/share/java/mysql.jar:bin/ imp.Principal
+
+	4. CONFIGURAR EXECUÇÃO AUTOMÁTICA
+
+ 		a) Abra o arquivo ~/.bashrc utilizando o super usuário (sudo);
+
+ 		b) Acrescente, ao final do arquivo, as seguintes linhas:
+ 			- # Inicialização do módulo Monitor (SEAM)
+ 			- cd alarmsys/src/servidor/observador/
+ 			- sudo java -Dpi4j.linking=dynamic -classpath .:/opt/pi4j/lib/'*':recursos/lib/'*':/usr/share/java/mysql.jar:bin/ imp.Principal
+
+ 		c) Salve as alterações no arquivo ./bashrc
+
+ 		d) Reinicie o sistema operacional para certificar a inicialização automática do módulo;

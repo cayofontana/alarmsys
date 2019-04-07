@@ -1,3 +1,11 @@
+// MONITOR - SEAM: Programa Principal
+// Descrição: este programa possui uma lista de sensores onde a cada laço (loop)
+//            do programa (função loop()), cada elemento (objeto sensor) da lista 
+//            verifica se algum objeto foi sensoriado (capturado). Caso todos os 
+//            Sensores acusem a presença de um objeto, simultanemanete em um 
+//            determinado período, o alarme é disparado e uma mensagem é enviada 
+//            ao servidor.
+
 #include <vector>
 #include "Sensor.h"
 #include "Ultrassom.h"

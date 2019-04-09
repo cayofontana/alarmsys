@@ -10,8 +10,6 @@ InfraVermelho::detectar(void)
 {
         if (deveExecutar())
         {
-                Serial.println("Tentando detectar.");
-                
                 setIntervalo(getFrequencia());
                 executar();
 

@@ -2,6 +2,7 @@
 #define REDE_H
 
 #include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
 
 class Rede
 {

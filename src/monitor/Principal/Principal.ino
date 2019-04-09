@@ -13,8 +13,9 @@
 #include "Rede.h"
 
 std::vector<std::shared_ptr<Sensor>> sensores;
-Rede rede("CAYO", "abc@123.");
+Rede rede("CAYO", "cayo220383");
 const uint8_t pinoLEDAlarme = 15;
+bool dadosEnviados = false;
 
 void setup() {
         Serial.begin(115200);
@@ -34,16 +35,17 @@ void loop() {
 
         for (std::vector<std::shared_ptr<Sensor>>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor) {
                 if (!(*sensor)->existeObjeto()) {
-                        objetoDetectado = false;
+                        objetoDetectado = dadosEnviados = false;
                         break;
                 }
                 objetoDetectado = true;
         }
 
-        if (objetoDetectado && rede.conectar()) {
-                rede.enviarDados("192.168.0.102", 8080, "cadastrodeteccao.jsp", 10);
-                objetoDetectado = !objetoDetectado;
+        if (objetoDetectado && !dadosEnviados && rede.conectar()) {
                 digitalWrite(pinoLEDAlarme, HIGH);
+                rede.enviarDados("192.168.0.106", 8080, "cadastrodeteccao.jsp", 10);
+                dadosEnviados = !dadosEnviados;
+                rede.desconectar();
         }
         else
                 digitalWrite(pinoLEDAlarme, LOW);

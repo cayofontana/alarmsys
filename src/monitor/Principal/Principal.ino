@@ -15,16 +15,19 @@
 std::vector<std::shared_ptr<Sensor>> sensores;
 Rede rede("CAYO", "cayo220383");
 const uint8_t pinoLEDAlarme = 15;
-bool dadosEnviados = false;
+bool dadosEnviados;
 
 void setup() {
         Serial.begin(115200);
+        
         pinMode(pinoLEDAlarme, OUTPUT);
         digitalWrite(pinoLEDAlarme, LOW);
 
         sensores.push_back(std::make_shared<Ultrassom>(5, 300, 15000, 4, 50, 20));
         sensores.push_back(std::make_shared<Ultrassom>(13, 300, 15000, 12, 50, 20));
         sensores.push_back(std::make_shared<InfraVermelho>(10, 10, 15000));
+        
+        dadosEnviados = false;
 }
 
 void loop() {
@@ -35,7 +38,8 @@ void loop() {
 
         for (std::vector<std::shared_ptr<Sensor>>::iterator sensor = sensores.begin(); sensor != sensores.end(); ++sensor) {
                 if (!(*sensor)->existeObjeto()) {
-                        objetoDetectado = dadosEnviados = false;
+                        objetoDetectado = false;
+                        dadosEnviados = false;
                         break;
                 }
                 objetoDetectado = true;

@@ -33,6 +33,7 @@ Monitor:
 
 		Windows:
 			if not exist bin\ mkdir bin\ && del /s /q bin\ javac -d bin -cp recursos\lib\*; imp\Principal.java
+
 		Linux:
 			mkdir -p bin/ && rm -rf bin/* && javac -d bin/ -classpath .:classes:/opt/pi4j/lib/'*':recursos/lib/'*' imp/Principal.java
 
@@ -40,8 +41,18 @@ Monitor:
 
 		Windows:
 			java -cp recursos\lib\*;bin imp.Principal
+
 		Linux:
 			java -Dpi4j.linking=dynamic -classpath .:/opt/pi4j/lib/'*':recursos/lib/'*':/usr/share/java/mysql.jar:bin/ imp.Principal
+
+		Definir IP ESTÁTICO para o servidor (evitar configurar sempre que a rede sofrer alteração):
+			a) Abrir o arquivo dhcpcd.conf (utilizando o super usuário)
+				- sudo vim /etc/dhcpcd.conf
+
+			b) No topo do arquivo, definir os seguintes valores
+				- interface eth0
+				- static ip_address=192.168.0.XX/24
+				- static routers=192.168.0.1
 
 	4. CONFIGURAR EXECUÇÃO AUTOMÁTICA
 

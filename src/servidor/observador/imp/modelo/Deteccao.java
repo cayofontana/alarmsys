@@ -58,25 +58,21 @@ public class Deteccao
 
 	public void preencherUltima()
 	{
-		Deteccao deteccao = null;
-		List<String> objetos = new ArrayList<>();
+		List<String> objetos;
 		String sqlConsulta;
-		int quantidadeColunas = 0, i = 0;
+		int i = 0;
 
 		sqlConsulta = "SELECT ";
 		sqlConsulta += "DETE_ID_DETECCAO, ";
-		quantidadeColunas++;
 		sqlConsulta += "DETE_VL_DISTANCIA_MEDIA, ";
-		quantidadeColunas++;
 		sqlConsulta += "DETE_DT_DETECCAO ";
-		quantidadeColunas++;
 		sqlConsulta += "FROM DETECCAO ";
 		sqlConsulta += "ORDER BY DETE_ID_DETECCAO ";
 		sqlConsulta += "DESC LIMIT 1";
 
 		objetos = acessoDados.listar(sqlConsulta);
 
-		if (!objetos.isEmpty())
+		if (objetos != null && !objetos.isEmpty())
 		{
 			id = Integer.parseInt(objetos.get(i++));
 			valor = Float.parseFloat(objetos.get(i++));

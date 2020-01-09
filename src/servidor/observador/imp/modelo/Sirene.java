@@ -16,7 +16,7 @@ public class Sirene
 	{
 		
 		status = false;
-		pinoSirene = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_00);
+		pinoSirene = GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_02);
 		pinoSirene.low();
 	}
 

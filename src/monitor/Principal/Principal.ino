@@ -47,7 +47,7 @@ void loop() {
 
         if (objetoDetectado && !dadosEnviados && rede.conectar()) {
                 digitalWrite(pinoLEDAlarme, HIGH);
-                rede.enviarDados("192.168.0.106", 8080, "cadastrodeteccao.jsp", 10);
+                rede.enviarDados("192.168.0.121", 8080, "cadastrodeteccao.jsp", 10);
                 dadosEnviados = !dadosEnviados;
                 rede.desconectar();
         }

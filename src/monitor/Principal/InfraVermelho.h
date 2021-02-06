@@ -6,7 +6,7 @@
 class InfraVermelho: public Sensor
 {
 public:
-        InfraVermelho(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo);
+        InfraVermelho(uint8_t, uint16_t, uint16_t);
         
         void detectar(void);
 

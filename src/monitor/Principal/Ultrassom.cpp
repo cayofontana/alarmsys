@@ -1,10 +1,7 @@
 #include "Ultrassom.h"
 
-Ultrassom::Ultrassom(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo, uint8_t pinoSaida, uint16_t distancia, uint16_t limiteDeteccoes) : Sensor(pinoEntrada, frequencia, intervalo)
+Ultrassom::Ultrassom(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo, uint8_t pinoSaida, uint16_t distancia, uint16_t limiteDeteccoes) : Sensor(pinoEntrada, frequencia, intervalo), pinoSaida(pinoSaida), distancia(distancia), limiteDeteccoes(limiteDeteccoes)
 {
-        this->pinoSaida = pinoSaida;
-        this->distancia = distancia;
-        this->limiteDeteccoes = limiteDeteccoes;
         distanciaEcoada = 0;
         deteccoes = 0;
       	pinMode(this->pinoSaida, OUTPUT);

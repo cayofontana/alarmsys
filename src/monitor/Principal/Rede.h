@@ -7,10 +7,10 @@
 class Rede
 {
 public:
-        Rede(const char *nome, const char *senha);
+        Rede(const char *, const char *);
         
         bool conectar(void);
-        bool enviarDados(const char *endereco, uint16_t porta, const char *arquivo, uint16_t valor);
+        bool enviarDados(const char *, uint16_t, const char *, uint16_t);
         void desconectar(void);
 
 private:

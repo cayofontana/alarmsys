@@ -1,9 +1,7 @@
 #include "Rede.h"
 
-Rede::Rede(const char *nome, const char *senha)
+Rede::Rede(const char *nome, const char *senha) : nome(nome), senha(senha)
 {
-        this->nome = nome;
-        this->senha = senha;
 }
 
 bool
@@ -24,20 +22,23 @@ bool
 Rede::enviarDados(const char *endereco, uint16_t porta, const char *arquivo, uint16_t valor)
 {
         HTTPClient clienteHTTP;
-        
-        clienteHTTP.begin((String)"http://" + endereco + (String)":" + porta + (String)"/" + arquivo + (String)"?distancia_media=" + (String)valor);
-        int codigoRetornoHTTP = clienteHTTP.GET();
-        
-        if (codigoRetornoHTTP > 0)
-                Serial.println("Erro:" + (String)clienteHTTP.getString());
-        
+        WiFiClient clienteWiFi;
+        int codigoRetornoHTTP;
+        bool dados_Enviados;
+
+        clienteHTTP.begin(clienteWiFi, (String)"http://" + endereco + (String)":" + porta + (String)"/" + arquivo + (String)"?distancia_media=" + (String)valor);
+        codigoRetornoHTTP = clienteHTTP.GET();
+        dados_Enviados = (codigoRetornoHTTP < 0 || codigoRetornoHTTP != HTTP_CODE_OK) ? false : true;
+        clienteWiFi.stop();
         clienteHTTP.end();
+
+        return (dados_Enviados);
 }
 
 void
 Rede::desconectar(void)
 {
-        WiFi.disconnect();
+        WiFi.disconnect(true);
 }
 
 void

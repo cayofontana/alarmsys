@@ -8,7 +8,7 @@ class Thread
 protected:
         Thread();
         
-        virtual void setIntervalo(unsigned long intervalo);
+        virtual void setIntervalo(unsigned long);
         virtual void executar();
         bool deveExecutar()
         {
@@ -25,8 +25,8 @@ private:
         unsigned long ultimaExecucao;
         unsigned long proximaExecucao;
 
-        void executado(unsigned long horario);
-        virtual bool deveExecutar(unsigned long horario);
+        void executado(unsigned long);
+        virtual bool deveExecutar(unsigned long);
 };
 
 #endif

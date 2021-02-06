@@ -6,7 +6,7 @@
 class Sensor: public Thread
 {
 public:
-        Sensor(uint8_t pinoEntrada, uint16_t frequencia, uint16_t intervalo);
+        Sensor(uint8_t, uint16_t, uint16_t);
 
         bool existeObjeto(void);
         virtual void detectar(void) = 0;

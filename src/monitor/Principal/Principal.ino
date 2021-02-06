@@ -11,17 +11,15 @@
 #include "Ultrassom.h"
 #include "InfraVermelho.h"
 #include "Rede.h"
+#include "Sirene.h"
 
 std::vector<std::shared_ptr<Sensor>> sensores;
 Rede rede("CAYO", "cayo220383");
-const uint8_t pinoLEDAlarme = 15;
+Sirene sirene(15);
 bool dadosEnviados;
 
 void setup() {
         Serial.begin(115200);
-        
-        pinMode(pinoLEDAlarme, OUTPUT);
-        digitalWrite(pinoLEDAlarme, LOW);
 
         sensores.push_back(std::make_shared<Ultrassom>(5, 300, 15000, 4, 50, 20));
         sensores.push_back(std::make_shared<Ultrassom>(13, 300, 15000, 12, 50, 20));
@@ -45,12 +43,16 @@ void loop() {
                 objetoDetectado = true;
         }
 
+        enviarMensagem(objetoDetectado, dadosEnviados);
+}
+
+void enviarMensagem(bool objetoDetectado, bool dadosEnviados) {
         if (objetoDetectado && !dadosEnviados && rede.conectar()) {
-                digitalWrite(pinoLEDAlarme, HIGH);
+                sirene.ligar();
                 rede.enviarDados("192.168.0.121", 8080, "cadastrodeteccao.jsp", 10);
                 dadosEnviados = !dadosEnviados;
                 rede.desconectar();
         }
         else
-                digitalWrite(pinoLEDAlarme, LOW);
+                sirene.desligar();
 }
